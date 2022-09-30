@@ -1,19 +1,53 @@
-YOUR NAME Lab 4: HTML Forms
+<!-- Bring in your successful HTML/CSS from the Flexbox lab -->
+<!-- Try typing 'doc' at the top of this file and pressing "tab" -->
+<!-- if your development environment is set up correctly -->
+<!-- the Emmett plugin will set this file up for you -->
 
-today's date
-Database Demos
-Main Page
+<!-- Requirements -->
+<!-- Your page will need a form in it with an 'action' to /api and a single text field with an id/name of "resto" -->
+<!-- If you open /routes/apiRoutes and go to line 38 you will find the server side answer to your request! -->
 
-Group Project Link (no site yet)
-Awesome Logo
-Github Link
+<!-- This week doesn't have a script.js file in it, because you're focusing on HTML and CSS -->
 
-image_1
-image_2
-image_3
-image_4
-image_5
+<html lang="en">
 
-footer item 1
-footer item 2
-footer item 3
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew Morris</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header freebox">
+            <h1>Andrew Morris INST377 Labs</h1>
+        </header>
+        <div class="container">
+            <div class="left_section box">
+                <h3>Form Inputs</h3>
+                <form action="/api" class="box">
+                    <label for="resto">Resturant Name</label>
+                    <input type="text" name="resto" id="resto"/>
+                    <button type="submit">Submit</button>
+            </form>
+            </div>
+            <div class="right_section box">
+                <h3>Local Restaurants</h3>
+                <div class="restaurants_list box">A list of local restaurants from an API</div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <div class="footer freebox">
+        <div style="display: flex; align-items: center">
+            <p>YOUR GITHUB ACCOUNT NAME</p>
+            <a href="https://github.com/ASM443/INST377-Lab-Work/tree/main/client/lab_1">ASM443</a>
+        </div>
+    </div>
+</body>
+
+</html>
