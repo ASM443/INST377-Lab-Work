@@ -33,21 +33,31 @@ document.addEventListener('DOMContentLoaded', () => {
     [0, 1, width, width + 1]
   ];
 
-  const ishape = [
+  const iShape = [
     [1, width + 1, width * 2 + 1, width * 3 + 1],
     [width, width + 1, width + 2, width + 3],
     [1, width + 1, width * 2 + 1, width * 3 + 1],
     [width, width + 1, width + 2, width + 3]
   ];
 
-  const theShapes = [lShape, zShape, tShape, oShape, ishape];
+  const theShapes = [lShape, zShape, tShape, oShape, iShape];
 
+  const currentPostion = 4;
+  const currentRotation = 0;
+  const random = Math.floor(Math.random() * theShapes.length);
+  console.log(random);
 
+  const current = theShapes[0][0];
 
+  function draw() {
+    current.forEach((x) => {
+      squares[currentPostion + x].classList.add('shape');
+    });
+  }
 
-
-
-
-
-
+  function undraw() {
+    current.forEach((x) => {
+      squares[currentPostion + x].classList.remove('shape');
+    });
+  }
 });

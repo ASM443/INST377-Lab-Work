@@ -10,5 +10,9 @@
 .grid div {
     width: 20px;
     height: 20px; 
-    background-color: violet;
+    
+}
+
+.shape {
+    background-color: rgb(122, 39, 190);
 }
