@@ -1,9 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid');
-  const squares = Array.from(document.querySelectorAll('.grid div'));
-  const ScoreDisplay = document.querySelector('#score');
-  const StartBtn = document.querySelector('#start-button');
+  let squares = Array.from(document.querySelectorAll('.grid div'));
+  const scoreDisplay = document.querySelector('#score');
+  const startBtn = document.querySelector('#start-button');
   const width = 10;
+  let nextRandom = 0;
+  let timerId;
+  let score = 0;
+  const colors = [
+    'orange',
+    'red',
+    'purple',
+    'green',
+    'blue'
+  ];
 
   const lShape = [
     [1, width + 1, width * 2 + 1, 2],
@@ -52,12 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function draw() {
     current.forEach((x) => {
       squares[currentPosition + x].classList.add('shape');
+      squares[currentPosition + x].style.backgroundColor = colors[random];
     });
   }
 
   function undraw() {
     current.forEach((x) => {
       squares[currentPosition + x].classList.remove('shape');
+      squares[currentPosition + x].style.backgroundColor = '';
     });
   }
 
@@ -73,10 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function freeze() {
     if (current.some((x) => squares[currentPosition + x + width].classList.contains('taken'))) {
       current.forEach((x) => squares[currentPosition + x].classList.add('taken'));
-      random = Math.floor(Math.random() * theShapes.length);
+      random = nextRandom;
+      nextRandom = Math.floor(Math.random() * theShapes.length);
       current = theShapes[random][currentRotation];
       currentPosition = 4;
       draw();
+      displayShape();
+      addScore();
+      gameOver();
     }
   }
 
@@ -104,6 +120,29 @@ document.addEventListener('DOMContentLoaded', () => {
     draw();
   }
 
+  function isAtRight() {
+    return current.some((index) => (currentPosition + index + 1) % width === 0);
+  }
+
+  function isAtLeft() {
+    return current.some((index) => (currentPosition + index) % width === 0);
+  }
+
+  function checkRotatedPosition(P) {
+    P = P || currentPosition;
+    if ((P + 1) % width < 4) {
+      if (isAtRight()) {
+        currentPosition += 1;
+        checkRotatedPosition(P);
+      }
+    } else if (P % width > 5) {
+      if (isAtLeft()) {
+        currentPosition -= 1;
+        checkRotatedPosition(P);
+      }
+    }
+  }
+
   function rotate() {
     undraw();
     // eslint-disable-next-line no-plusplus
@@ -128,4 +167,66 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('keyup', control);
+
+  const displaySquares = document.querySelectorAll('.mini-grid div');
+  const displayWidth = 4;
+  const displayIndex = 0;
+
+  const upNextShape = [
+    [1, displayWidth + 1, displayWidth * 2 + 1, 2],
+    [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1],
+    [1, displayWidth, displayWidth + 1, displayWidth + 2],
+    [0, 1, displayWidth, displayWidth + 1],
+    [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1]
+
+  ];
+
+  function displayShape() {
+    displaySquares.forEach((square) => {
+      square.classList.remove('shape');
+      square.style.backgroundColor = '';
+    });
+    console.log(nextRandom);
+    upNextShape[nextRandom].forEach((index) => {
+      displaySquares[displayIndex + index].classList.add('shape');
+      displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom];
+    });
+  }
+
+  startBtn.addEventListener('click', () => {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+    } else {
+      draw();
+      timerId = setInterval(moveDown, 1000);
+      nextRandom = Math.floor(Math.random() * theShapes.length);
+      displayShape();
+    }
+  });
+
+  function addScore() {
+    for (let i = 0; i < 199; i += width) {
+      const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9];
+      if (row.every((index) => squares[index].classList.contains('taken'))) {
+        score += 10;
+        scoreDisplay.innerHTML = score;
+        row.forEach((index) => {
+          squares[index].classList.remove('taken');
+          squares[index].classList.remove('tetromino');
+          squares[index].style.backgroundColor = '';
+        });
+        const squaresRemoved = squares.splice(i, width);
+        squares = squaresRemoved.concat(squares);
+        squares.forEach((cell) => grid.appendChild(cell));
+      }
+    }
+  }
+
+  function gameOver() {
+    if (current.some((index) => squares[currentPosition + index].classList.contains('taken'))) {
+      scoreDisplay.innerHTML = 'end';
+      clearInterval(timerId);
+    }
+  }
 });
