@@ -42,22 +42,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const theShapes = [lShape, zShape, tShape, oShape, iShape];
 
-  const currentPostion = 4;
+  let currentPosition = 4;
   const currentRotation = 0;
-  const random = Math.floor(Math.random() * theShapes.length);
+  let random = Math.floor(Math.random() * theShapes.length);
   console.log(random);
 
-  const current = theShapes[0][0];
+  let current = theShapes[0][0];
 
   function draw() {
     current.forEach((x) => {
-      squares[currentPostion + x].classList.add('shape');
+      squares[currentPosition + x].classList.add('shape');
     });
   }
 
   function undraw() {
     current.forEach((x) => {
-      squares[currentPostion + x].classList.remove('shape');
+      squares[currentPosition + x].classList.remove('shape');
     });
+  }
+
+  timerId = setInterval(moveDown, 300);
+
+  function moveDown() {
+    undraw();
+    currentPosition += width;
+    draw();
+    freeze();
+  }
+
+  function freeze() {
+    if (current.some((x) => squares[currentPosition + x + width].classList.contains('taken'))) {
+      current.forEach((x) => squares[currentPosition + x].classList.add('taken'));
+      random = Math.floor(Math.random() * theShapes.length);
+      current = theShapes[random][currentRotation];
+      currentPosition = 4;
+      draw();
+    }
+  }
+
+  function moveLeft() {
+    undraw();
+    const isALeftEdge = current.some((x) => (currentPosition + index) % width === 0);
+    if (!isAtLeftEdge) currentPosition -= 1;
+
+    if (current.some((x) => squares[currentPosition + x].classList.contains('taken'))) {
+      currentPosition += 1;
+    }
+
+    draw();
   }
 });
