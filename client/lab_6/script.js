@@ -17,9 +17,19 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
-
 function injectHTML(list) {
   console.log('fired injectHTML');
+  const target = document.querySelector('#restaurants_list');
+  target.innerHTML = '';
+
+  const listEl = document.createElement('ol');
+  target.appendChild(listEl);
+
+  list.forEach((item) => {
+    const el = document.createElement('li');
+    el.innerText = item.name;
+    listEl.appendChild(el);
+  });
   /*
   ## JS and HTML Injection
     There are a bunch of methods to inject text or HTML into a document using JS
@@ -42,7 +52,7 @@ function processRestaurants(list) {
   const newArray = range.map((item) => {
     const index = getRandomInt(0, list.length);
     return list[index];
-  })
+  });
   return newArray;
   /*
     ## Process Data Separately From Injecting It
@@ -107,7 +117,7 @@ async function mainEvent() {
 
     loadAnimation.classList.remove('lds-ellipsis');
     loadAnimation.classList.add('lds-ellipsis_hidden');
- 
+
     // And here's an eventListener! It's listening for a "submit" button specifically being clicked
     // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
     form.addEventListener('submit', (submitEvent) => {
