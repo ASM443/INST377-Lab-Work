@@ -1,7 +1,3 @@
-/* CSS instructions for Lab 5 */
-/* Bring in your successful CSS from week 4 */
-/* In your #map rule, set map to display:none; to temporarily hide your map box */
-
 * {
     box-sizing: border-box;
   }
@@ -41,12 +37,9 @@
   a {
     display: inline-block;
     text-decoration: none;
-    color:#08dee6
   }
   
-
-  
-  h2, h3 {
+  h2 {
     margin:0;
     padding:0;
     padding-bottom:1.5rem;
@@ -99,6 +92,7 @@
     /* this will push other blocks out of the way */
   
     /* colors */
+    background-color: #ffe08a;
     color: #4a4a4a;
   
     /* shapes */
@@ -109,7 +103,7 @@
   
   
     /* box-shadows are fancy */
-    
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
   }
   
   
@@ -123,7 +117,7 @@
   */
   
   .box {
-    background-color: #C6D2ED;
+    background-color: rgba(239, 239, 239, 0.40);
     border: 2px dashed;
     border-radius: 4px;
   
@@ -132,29 +126,20 @@
     padding: 1.5rem;
     margin: 0 auto;
   }
-
-  .freebox{
-    background-color: #C6D2ED;
-    border: 2px dashed;
-    border-radius: 4px;
-    padding: 1.5rem;
-  }
   
   .left_section {
-    background-color: #827081;
+    background-color: rgba(0, 139, 139, 0.8);
     flex: 0 1 auto;
     margin: 1rem;
     padding: 1.5rem;
   }
   
   .right_section {
-    background-color: #AEA3B0;
+    background-color: rgba(255, 224, 138, 0.7);
     flex: 1 2 auto;
     margin: 1rem;
     align-items: center;
     max-width: 450px;
-    display: flex;
-    flex-flow: column;
   }
   
   /*
@@ -166,13 +151,13 @@
   .footer {
     flex-shrink: 0;
     padding: 1rem;
-    background-color: #413d3e;
+    background-color: rgba(0, 139, 139, 0.8);
     font-size: 1.2rem;
     font-weight: 600;
   }
   
   .footer a {
-    color:#08dee6;
+    color: rgba(255, 224, 138, 1);
     text-decoration: underline;
   }
   
@@ -183,7 +168,7 @@
   */
   .footer a:hover {
     /* Hue, saturation, luminosity, alpha */
-    background-color: #E7E6F7;
+    background-color: hsla(0, 0%, 90%, 0.15);
     /* red, green, blue, alpha */
     color: rgb(246, 169, 93);
     text-decoration: none;
@@ -280,56 +265,3 @@
   .next:hover {
     /* Pick a good background colour for your hover pseudoclass */
   }
-
-
-/*
-Form Styles
-*/
-
-form input {
-    /* This is a hack to make sure our boxes line up with one another nicely */
-    width: 100%;
-    width: -moz-available;          /* WebKit-based browsers will ignore this. */
-    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-    width: fill-available;
-
-    /* here we are setting white space correctly */
-    margin-bottom: 1rem;
-    height: 2rem;
-    border-radius: 4px;
-  }
-
-  form label {
-    width: 100%;
-    width: -moz-available;          /* WebKit-based browsers will ignore this. */
-    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-    width: fill-available;
-    align-items: flex-start;
-
-    display: block; /* this turns the label text into a box we can set margins on */
-    margin-bottom: 0.5rem;
-  }
-
-/* How To Write A Media Query For Small Screens */
-
-@media only screen and (max-width: 736px){
-    /* Rules in here will only apply when a screen is the correct size */
-    /* check it out by using your developer tools to shrink your screen-size */
-    .container {
-      background-color: rgba(223, 224, 122, 0.37);
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .right_section {
-        background-color: #AEA3B0;
-        flex: 1 2 auto;
-        margin: 1rem;
-        align-items: self-start;
-        max-width: 450px;
-        display: flex;
-        flex-flow: column;
-    }
-    
-}
