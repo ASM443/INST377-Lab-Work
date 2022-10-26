@@ -341,7 +341,7 @@ form label {
   }
 
   .lds-ellipsis_hidden {
-    display:hidden;
+    display:none;
   }
 
   .lds-ellipsis div {
