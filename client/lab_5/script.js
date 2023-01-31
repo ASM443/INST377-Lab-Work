@@ -56,7 +56,7 @@ async function mainEvent() { // the async keyword means we can make API requests
     const arrayFromJson = await results.json();
     console.table(arrayFromJson.data); // this is called "dot notation"
     // arrayFromJson.data - we're accessing a key called 'data' on the returned object
-    // it initially contains all 1,000 records from your request
+    // it initially contains all 1,000 records from your request.
   });
 }
 
