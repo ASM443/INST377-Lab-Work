@@ -8,6 +8,8 @@ This repository is the starting point for most labs in INST377. It represents a 
 * Install the software dependencies
 * Start your server, which will run on `port 3000` locally
 
+### NPM is no longer needed
+
 ### Install Dependencies 
 
     npm install
